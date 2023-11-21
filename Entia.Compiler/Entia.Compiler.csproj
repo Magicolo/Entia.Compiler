@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <LangVersion>8</LangVersion>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Entia"> <HintPath>..\Entia\Entia.dll</HintPath> </Reference>
+    <Reference Include="Entia.Core"> <HintPath>..\Entia\Entia.Core.dll</HintPath> </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Entia.Compiler
+build_property.ProjectDir = c:\Projects\C#\Entia.Compiler\Entia.Compiler\

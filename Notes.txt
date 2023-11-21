@@ -1,0 +1,37 @@
+- have a validator modules that check validation attributes such as [All(type)]
+	- Validators.Validate<T>()
+	- Entity would be a 'IValideatable'
+	
+- move all 'Modules.Components' state in a resource?
+	- when serializing, only data in components and resources will be considered
+	- this can be true only if modules store their state in resources
+	- this also means that the local state of system will be ignored
+		- I think this as it should
+		
+		
+public struct Shoot : IRun
+{
+	public Resource<Resources.Time> Time;
+	public Emitter<DoShoot> DoShoot;
+	public State<(double counter, double cooldown)> State;
+
+	void IRun.Run()
+	{
+		ref var time = ref Time.Value;
+		ref var state = ref _state.Value;
+		state.counter -= time.Delta;
+		
+		if (state.counter < 0.0)
+		{
+			state.counter = state.cooldown;
+			DoShoot.Emit();
+		}
+	}
+}
+
+- require systems that are used multiple times to have unique paths when serializing
+	- System<Boba>(); System<Boba>(); // invalid
+	- System<Boba>("A"); System<Boba>("B"); // valid
+	- Sequence(Sequence(System<Boba>()), Sequence(System<Boba>())) // invalid
+	- Sequence(Sequence("A", System<Boba>()), Sequence("B", System<Boba>())) // valid
+	- this will allow to get a unique path for each system
